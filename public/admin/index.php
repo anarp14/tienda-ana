@@ -36,7 +36,7 @@
     }
 
     $pdo = conectar();
-    $sent = $pdo->query("SELECT * FROM articulos ORDER BY codigo");
+    $sent = $pdo->query("SELECT p.*, c.categoria FROM articulos p JOIN categorias c ON c.id = p.categoria_id ORDER BY codigo");
     ?>
 
     <div class="container mx-auto">
@@ -56,6 +56,8 @@
                     <th scope="col" class="py-3 px-6">Descripción</th>
                     <th scope="col" class="py-3 px-6">Precio</th>
                     <th scope="col" class="py-3 px-6">Stock</th>
+                    <th scope="col" class="py-3 px-6">Categoria</th>
+                    <th scope="col" class="py-3 px-6">Categoria id</th>
                     <th scope="col" class="py-3 px-6 text-center">Acciones</th>
                 </thead>
                 <tbody>
@@ -65,6 +67,8 @@
                             <td class="py-4 px-6"><?= hh($fila['descripcion']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['precio']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['stock']) ?></td>
+                            <td class="py-4 px-6"><?= hh($fila['categoria']) ?></td>
+                            <td class="py-4 px-6"><?= hh($fila['categoria_id']) ?></td>
                             <td class="px-6 text-center">
                                 <?php $fila_id = hh($fila['id']) ?>
                             <form action="/admin/editar.php" method="POST" class="inline">

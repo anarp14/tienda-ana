@@ -8,6 +8,8 @@ $codigo= obtener_post('codigo');
 $descripcion = obtener_post('descripcion');
 $precio = obtener_post('precio');
 $stock = obtener_post('stock');
+$categoria_id= obtener_post('categoria_id');
+
 
 $pdo = conectar();
 $set = [];
@@ -29,17 +31,19 @@ if (isset($stock) && $stock != '') {
     $set[] = 'stock = :stock';
     $execute[':stock'] = $stock;
 }
-$set= !empty($set) ? 'SET ' . implode(' , ', $set) : '';
+if (isset($categoria_id) && $categoria_id != '') {
+    $set[] = 'categoria_id = :categoria_id';
+    $execute[':categoria_id'] = $categoria_id;
+}
 
+$set= !empty($set) ? 'SET ' . implode(' , ', $set) : '';
+var_dump($set);
 $sent = $pdo->prepare("UPDATE articulos
                         $set
                        WHERE id = $id");
 
-var_dump($execute);
-var_dump($where);
-$sent->execute($execute);
 
-var_dump($sent);
+$sent->execute($execute);
 
 $_SESSION['exito'] = "Artículo modificado con éxito.";
 return volver_admin();
