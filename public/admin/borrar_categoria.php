@@ -21,10 +21,18 @@ if(!ctype_digit($id) || !isset($id)){
     return volver_categorias();
 } else {
     $pdo = conectar();
-    $sent = $pdo->prepare("DELETE FROM categorias WHERE id = :id");
+    $sent = $pdo->prepare("SELECT COUNT(categoria) FROM categorias WHERE id = :id AND id NOT in (SELECT categoria_id FROM articulos);");
     $sent->execute([':id' => $id]);
+    if ($sent->fetchColumn() != 0) {
+        $sent = $pdo->prepare("DELETE FROM categorias WHERE id = :id");
+        $sent->execute([':id' => $id]);
+        $_SESSION['exito'] = 'La categoria se ha borrado correctamente.';
+    } else{
+        $_SESSION['error'] = 'La categoria está vinculada a un artículo.';
+    }
+   
 }
 
-$_SESSION['exito'] = 'La categoria se ha borrado correctamente.';
-
 volver_categorias();
+
+
