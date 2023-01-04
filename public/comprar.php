@@ -24,9 +24,10 @@
         $sent = $pdo->prepare('SELECT *
                                  FROM articulos
                                 WHERE id IN (:ids)');
+        $sent->execute([':ids' => implode(', ', $carrito->getIds())]);
         foreach ($sent->fetchAll(PDO::FETCH_ASSOC) as $fila) {
             if ($fila['stock'] < $carrito->getLinea($fila['id'])->getCantidad()) {
-                $_SESSION['error'] = 'No hay existencias suficientes para crear la factura.';
+                $_SESSION['error'] = 'No hay existencias suficientes pa ra crear la factura.';
                 return volver();
             }
         }
@@ -115,7 +116,6 @@
                 <input type="hidden" name="_testigo" value="1">
                 <button type="submit" href="" class="mx-auto focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">Realizar pedido</button>
             </form>
-            <a href="/index.php" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">Seguir comprando</a>                                      
         </div>
     </div>
     <script src="/js/flowbite/flowbite.js"></script>
