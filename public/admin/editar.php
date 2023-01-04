@@ -9,6 +9,7 @@ $descripcion = obtener_post('descripcion');
 $precio = obtener_post('precio');
 $stock = obtener_post('stock');
 $categoria_id= obtener_post('categoria_id');
+$visible= obtener_post('visible');
 
 
 $pdo = conectar();
@@ -35,13 +36,15 @@ if (isset($categoria_id) && $categoria_id != '') {
     $set[] = 'categoria_id = :categoria_id';
     $execute[':categoria_id'] = $categoria_id;
 }
+if (isset($visible) && $visible != '') {
+    $set[] = 'visible = :visible';
+    $execute[':visible'] = $visible;
+}
 
 $set= !empty($set) ? 'SET ' . implode(' , ', $set) : '';
-var_dump($set);
 $sent = $pdo->prepare("UPDATE articulos
                         $set
                        WHERE id = $id");
-
 
 $sent->execute($execute);
 

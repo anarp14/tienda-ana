@@ -6,6 +6,7 @@ CREATE TABLE articulos (
     descripcion varchar(255)  NOT NULL,
     precio      numeric(7, 2) NOT NULL,
     stock       int           NOT NULL,
+    visible     bool          NOT NULL,
     categoria_id bigint NOT NULL REFERENCES categorias(id)
 );
 
@@ -44,14 +45,14 @@ CREATE TABLE articulos_facturas (
 
 -- Carga inicial de datos de prueba:
 
-INSERT INTO articulos (codigo, descripcion, precio, stock, categoria_id)
-    VALUES ('18273892389', 'Yogur piña', 200.50, 4,2),
-           ('83745828273', 'Tigretón', 50.10, 2,2),
-           ('51736128495', 'Disco duro SSD 500 GB', 150.30, 0,1),
-           ('83746828273', 'Tigretón', 50.10, 3,2),
-           ('51786128435', 'Disco duro SSD 500 GB', 150.30, 5,1),
-           ('83745228673', 'Tigretón', 50.10, 8,2),
-           ('51786198495', 'Disco duro SSD 500 GB', 150.30, 1,1);
+INSERT INTO articulos (codigo, descripcion, precio, stock,visible,categoria_id)
+    VALUES ('18273892389', 'Yogur piña', 200.50, 4, false, 2),
+           ('83745828273', 'Tigretón', 50.10, 2, true, 2),
+           ('51736128495', 'Disco duro SSD 500 GB', 150.30, 0, true, 1),
+           ('83746828273', 'Tigretón', 50.10, 3, true, 2),
+           ('51786128435', 'Disco duro SSD 500 GB', 150.30, 5, true, 1),
+           ('83745228673', 'Tigretón', 50.10, 8, true, 2),
+           ('51786198495', 'Disco duro SSD 500 GB', 150.30, 1, true, 1);
 
 INSERT INTO usuarios (usuario, password, validado)
     VALUES ('admin', crypt('admin', gen_salt('bf', 10)), true),
@@ -61,4 +62,4 @@ INSERT INTO usuarios (usuario, password, validado)
 INSERT INTO categorias (categoria) VALUES
 ('tecnologia'),
 ('alimentacion'),
-('ropas');
+('juguetes');

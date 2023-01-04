@@ -44,12 +44,18 @@
         <?php require '../../src/_alerts.php' ?>
         <?php require_once '../../src/_modales.php'?>
         <div class="overflow-x-auto relative mt-4">
-           <button data-modal-toggle="insertar" href="/admin/insertar.php" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+        <a href="usuarios.php" target="_blank">
+                <button class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">Usuarios</button>
+            </a>
+            <a href="categorias.php" target="_blank">
+                <button class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">Categorias</button>
+            </a>
+
+            <button data-modal-toggle="insertar" href="/admin/insertar.php" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-green dark:bg-gray-900 rounded-md group-hover:bg-opacity-1">
                     Insertar artículo
                 </span>
             </button>
-
             <table class="mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <th scope="col" class="py-3 px-6">Código</th>
@@ -58,6 +64,7 @@
                     <th scope="col" class="py-3 px-6">Stock</th>
                     <th scope="col" class="py-3 px-6">Categoria</th>
                     <th scope="col" class="py-3 px-6">Categoria id</th>
+                    <th scope="col" class="py-3 px-6">Visibilidad</th>
                     <th scope="col" class="py-3 px-6 text-center">Acciones</th>
                 </thead>
                 <tbody>
@@ -69,6 +76,7 @@
                             <td class="py-4 px-6"><?= hh($fila['stock']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['categoria']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['categoria_id']) ?></td>
+                            <td class="py-4 px-6"><?= hh($fila['visible']) ? 'Si' : 'No' ?></td>
                             <td class="px-6 text-center">
                                 <?php $fila_id = hh($fila['id']) ?>
                             <form action="/admin/editar.php" method="POST" class="inline">

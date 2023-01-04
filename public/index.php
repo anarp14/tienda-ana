@@ -19,6 +19,7 @@
     $precio_max = obtener_get('precio_max');
     $nombre = obtener_get('nombre');
     $categoria = obtener_get('categoria');
+    $visible = obtener_get('visible');
     ?>
 
     <?php
@@ -43,7 +44,7 @@
         $where[] = 'lower(categoria) LIKE lower(:categoria)';
         $execute[':categoria'] = "%$categoria%";
     }
-    $where = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
+    $where = !empty($where) ?  'WHERE ' . implode(' AND ', $where) . ' AND visible = true' : 'WHERE visible = true';
     $sent = $pdo->prepare("SELECT p.*, c.categoria FROM articulos p JOIN categorias c ON c.id = p.categoria_id $where ORDER BY codigo");
     $sent->execute($execute);
 
