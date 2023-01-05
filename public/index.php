@@ -57,30 +57,24 @@
             <form action="" method="get">
                 <fieldset>
                     <legend> <b>Criterios de búsqueda </b></legend>
-                    <p>
-                        <label>
+                    <div class="flex mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        <label class="block mb-2 text-sm font-medium w-1/4 pr-4">
                             Precio mínimo:
-                            <input type="text" name="precio_min" size="8" value="<?= $precio_min ?>">
+                            <input type="text" name="precio_min" value="<?= $precio_min ?>" class="border text-sm rounded-lg w-full p-2.5">
                         </label>
-                    </p>
-                    <p>
-                        <label>
+                        <label class="block mb-2 text-sm font-medium w-1/4 pr-4">
                             Precio máximo:
-                            <input type="text" name="precio_max" size="8" value="<?= $precio_max ?>">
+                            <input type="text" name="precio_max" value="<?= $precio_max ?>" class="border text-sm rounded-lg w-full p-2.5">
                         </label>
-                    </p>
-                    <p>
-                        <label>
+                        <label class="block mb-2 text-sm font-medium w-1/4 pr-4">
                             Nombre del articulo:
-                            <input type="text" name="nombre" size="25" value="<?= $nombre ?>">
+                            <input type="text" name="nombre" value="<?= $nombre ?>" class="border text-sm rounded-lg w-full p-2.5">
                         </label>
-                    </p>
-                    <p>
-                        <label>
+                        <label class="block mb-2 text-sm font-medium w-1/4 pr-4">
                             Categoria:
-                            <input type="text" name="categoria" size="25" value="<?= $categoria?>">
+                            <input type="text" name="categoria" value="<?= $categoria ?>" class="border text-sm rounded-lg w-full p-2.5">
                         </label>
-                    </p>
+                    </div>
                     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Buscar</button>
                 </fieldset>
             </form>
@@ -91,10 +85,10 @@
                 <?php foreach ($sent as $fila) : ?>
                     <div class="p-6 max-w-xs min-w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><?= hh($fila['descripcion']) ?> - <?= hh($fila['precio']) ?> € </h5> 
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><?= hh($fila['descripcion']) ?> - <?= hh($fila['precio']) ?> € </h5>
                         </a>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><?= hh($fila['descripcion']) ?></p>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> Categoria:  <?= hh($fila['categoria']) ?></p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> Categoria: <?= hh($fila['categoria']) ?></p>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Existencias: <?= hh($fila['stock']) ?></p>
                         <?php if ($fila['stock'] > 0) : ?>
                             <a href="/insertar_en_carrito.php?id=<?= $fila['id'] ?>" class="inline-flex items-center py-2 px-3.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -130,7 +124,7 @@
                                         <td class="py-4 px-6"><?= $articulo->getDescripcion() ?></td>
                                         <td class="py-4 px-6 text-center"><?= $cantidad ?></td>
                                         <td>
-                                            <a href="/eliminar_articulo_carrito.php?id=<?= $articulo->getId()?>" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</a>                                      
+                                            <a href="/eliminar_articulo_carrito.php?id=<?= $articulo->getId() ?>" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</a>
                                         </td>
                                     </tr>
                                 <?php endforeach ?>
