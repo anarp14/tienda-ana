@@ -55,6 +55,12 @@
                         <input type="number"  step="0.01" name="precio" id="precio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
                     <div class="mb-6">
+                        <label for="precio_rebajado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Precio rebajado
+                        </label>
+                        <input type="text" name="precio_rebajado" id="precio_rebajado" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <div class="mb-6">
                         <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Stock
                         </label>
@@ -107,6 +113,10 @@
                     <div>
                         <label for="precio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Precio</label>
                         <input type="text" name="precio" id="precio" placeholder="99.99" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                    </div>
+                    <div>
+                        <label for="precio_rebajado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Precio rebajado</label>
+                        <input type="text" name="precio_rebajado" id="precio_rebajado" placeholder="99.99" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                     </div>
                     <div>
                         <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stock</label>

@@ -7,6 +7,7 @@ $id = obtener_post('id');
 $codigo= obtener_post('codigo');
 $descripcion = obtener_post('descripcion');
 $precio = obtener_post('precio');
+$precio_rebajado = obtener_post('precio_rebajado');
 $stock = obtener_post('stock');
 $categoria_id= obtener_post('categoria_id');
 $visible= obtener_post('visible');
@@ -27,6 +28,10 @@ if (isset($descripcion) && $descripcion != '') {
 if (isset($precio) && $precio != '') {
     $set[] = 'precio = :precio';
     $execute[':precio'] = $precio;
+}
+if (isset($precio_rebajado)) {
+    $set[] = 'precio_rebajado = :precio_rebajado';
+    $execute[':precio_rebajado'] = $precio_rebajado;
 }
 if (isset($stock) && $stock != '') {
     $set[] = 'stock = :stock';

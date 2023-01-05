@@ -63,6 +63,7 @@
                     <th scope="col" class="py-3 px-6">Código</th>
                     <th scope="col" class="py-3 px-6">Descripción</th>
                     <th scope="col" class="py-3 px-6">Precio</th>
+                    <th scope="col" class="py-3 px-6">Precio rebajado</th>
                     <th scope="col" class="py-3 px-6">Stock</th>
                     <th scope="col" class="py-3 px-6">Categoria</th>
                     <th scope="col" class="py-3 px-6">Categoria id</th>
@@ -75,6 +76,7 @@
                             <td class="py-4 px-6"><?= hh($fila['codigo']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['descripcion']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['precio']) ?></td>
+                            <td class="py-4 px-6"><?= hh($fila['precio_rebajado']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['stock']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['categoria']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['categoria_id']) ?></td>
