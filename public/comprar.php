@@ -80,6 +80,7 @@
                     <th scope="col" class="py-3 px-6">Descripción</th>
                     <th scope="col" class="py-3 px-6">Cantidad</th>
                     <th scope="col" class="py-3 px-6">Precio</th>
+                    <th scope="col" class="py-3 px-6">Precio rebajado</th>
                     <th scope="col" class="py-3 px-6">Importe</th>
                 </thead>
                 <tbody>
@@ -90,7 +91,12 @@
                         $codigo = $articulo->getCodigo();
                         $cantidad = $linea->getCantidad();
                         $precio = $articulo->getPrecio();
-                        $importe = $cantidad * $precio;
+                        $precio_rebajado = $articulo->getPrecio_rebajado();
+                        if (isset($precio_rebajado) && $precio_rebajado != '') {
+                            $importe = $cantidad * $precio_rebajado;
+                        } else {
+                            $importe = $cantidad * $precio;
+                        }
                         $total += $importe;
                         ?>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -100,6 +106,17 @@
                             <td class="py-4 px-6 text-center">
                                 <?= dinero($precio) ?>
                             </td>
+                            <?php if ($precio_rebajado == null) : ?>
+                                <?php $precio_rebajado = 0; ?>
+                                <td class="py-4 px-6 text-center">
+                                    <?= dinero($precio_rebajado); ?>
+                                </td>
+                            <?php else : ?>
+                                <td class="py-4 px-6 text-center">
+                                    <?= dinero($precio_rebajado); ?>
+                                </td>
+                            <?php endif ?>
+
                             <td class="py-4 px-6 text-center">
                                 <?= dinero($importe) ?>
                             </td>

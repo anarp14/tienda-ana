@@ -12,6 +12,7 @@ class Articulo extends Modelo
     private $codigo;
     private $descripcion;
     private $precio;
+    private $precio_rebajado;
     private $stock;
     private $categoria_id;
 
@@ -21,6 +22,7 @@ class Articulo extends Modelo
         $this->codigo = $campos['codigo'];
         $this->descripcion = $campos['descripcion'];
         $this->precio = $campos['precio'];
+        $this->precio_rebajado = $campos['precio_rebajado'];
         $this->stock = $campos['stock'];
         $this->categoria_id = $campos['categoria_id'];
     }
@@ -43,6 +45,11 @@ class Articulo extends Modelo
     public function getPrecio()
     {
         return $this->precio;
+    }
+
+    public function getPrecio_rebajado()
+    {
+        return $this->precio_rebajado;
     }
 
     public function getStock()
