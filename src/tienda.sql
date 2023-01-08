@@ -5,10 +5,12 @@ CREATE TABLE articulos (
     codigo      varchar(13)   NOT NULL UNIQUE,
     descripcion varchar(255)  NOT NULL,
     precio      numeric(7, 2) NOT NULL,
-    precio_rebajado numeric(7),
+    descuento   numeric(2)          DEFAULT 0,
+    cantidad_descuento numeric(3) DEFAULT 0,
     stock       int           NOT NULL,
     visible     bool          NOT NULL,
-    categoria_id bigint NOT NULL REFERENCES categorias(id)          
+    categoria_id bigint NOT NULL REFERENCES categorias(id)
+    CHECK (cantidad_descuento >= 0 AND cantidad_descuento <= 100)          
 );
 
 DROP TABLE IF EXISTS categorias CASCADE;
@@ -46,14 +48,14 @@ CREATE TABLE articulos_facturas (
 
 -- Carga inicial de datos de prueba:
 
-INSERT INTO articulos (codigo, descripcion, precio, precio_rebajado, stock,visible,categoria_id)
-    VALUES ('18273892389', 'Yogur piña', 200.50, 200, 4, false, 2),
-           ('83745828273', 'Tigretón', 50.10, null, 2, true, 2),
-           ('51736128495', 'Disco duro SSD 500 GB', 150.30, null,  0, true, 1),
-           ('83746828273', 'Tigretón', 50.10, null, 3, true, 2),
-           ('51786128435', 'Disco duro SSD 500 GB', 150.30, 150, 5, true, 1),
-           ('83745228673', 'Tigretón', 50.10, 50, 8, true, 2),
-           ('51786198495', 'Disco duro SSD 500 GB', 150.30, null, 1, true, 1);
+INSERT INTO articulos (codigo, descripcion, precio, stock,visible,categoria_id)
+    VALUES ('18273892389', 'Yogur piña', 200.50, 4, false, 2),
+           ('83745828273', 'Tigretón', 50.10, 2, true, 2),
+           ('51736128495', 'Disco duro SSD 500 GB', 150.30, 0, true, 1),
+           ('83746828273', 'Tigretón', 50.10, 3, true, 2),
+           ('51786128435', 'Disco duro SSD 500 GB', 150.30, 5, true, 1),
+           ('83745228673', 'Tigretón', 50.10, 8, true, 2),
+           ('51786198495', 'Disco duro SSD 500 GB', 150.30, 1, true, 1);
 
 INSERT INTO usuarios (usuario, password, validado)
     VALUES ('admin', crypt('admin', gen_salt('bf', 10)), true),
