@@ -56,7 +56,6 @@ $total = dinero($total);
 
 $res = <<<EOT
 <p>Factura número: {$factura->id}</p>
-
 <table border="1" class="font-sans mx-auto">
     <tr>
         <th>Código</th>
@@ -69,7 +68,6 @@ $res = <<<EOT
         $filas_tabla
     </tbody>
 </table>
-
 <p>Total: $total</p>
 EOT;
 

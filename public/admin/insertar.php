@@ -12,7 +12,7 @@ $stock = $_POST['stock'];
 $categoria_id = $_POST['categoria_id'];
 $visible = $_POST['visible'];
 
-var_dump($precio_rebajado);
+
 // Conecta con la base de datos
 $pdo = conectar();
 
