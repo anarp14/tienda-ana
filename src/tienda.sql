@@ -6,7 +6,7 @@ CREATE TABLE articulos (
     descripcion varchar(255)  NOT NULL,
     precio      numeric(7, 2) NOT NULL,
     descuento   numeric(3)          DEFAULT 0,
-    cantidad_descuento  numeric(7, 2) DEFAULT 0,
+    nuevo_precio  numeric(7, 2) DEFAULT 0,
     stock       int           NOT NULL,
     visible     bool          NOT NULL,
     categoria_id bigint NOT NULL REFERENCES categorias(id)

@@ -19,8 +19,15 @@ $cantidad_descuento = $precio_inicial * ($descuento / 100);
 $nuevo_precio = $precio_inicial - $cantidad_descuento;
 
 // Actualizar el precio del producto en la base de datos
-$sent = $pdo->prepare("UPDATE articulos SET precio = :nuevo_precio, descuento = :descuento, cantidad_descuento = :cantidad_descuento WHERE id = :product_id");
-$resultado = $sent->execute(['nuevo_precio' => $nuevo_precio, 'descuento' => $descuento, 'cantidad_descuento' => $cantidad_descuento, 'product_id' => $id]);
+$sent = $pdo->prepare("UPDATE articulos
+                            SET descuento = :descuento,
+                                nuevo_precio = :nuevo_precio
+                            WHERE id = :product_id");
+$resultado = $sent->execute([
+    'descuento' => $descuento,
+    'nuevo_precio' => $nuevo_precio, 'product_id' => $id
+]);
+
 if ($resultado) {
     $_SESSION['exito'] = 'Se ha aplicado correctamente el descuento al producto.';
 } else {

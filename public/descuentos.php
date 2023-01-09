@@ -88,7 +88,8 @@
                     <div class="p-6 max-w-xs min-w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><?= hh($fila['descripcion']) ?> </h5>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-red-900 dark:text-white"> Precio Rebajado : <?= hh($fila['precio']) ?> €</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-black-900 dark:text-white"> Precio: <?= hh($fila['precio']) ?> €</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-red-900 dark:text-white"> Precio Rebajado : <?= hh($fila['nuevo_precio']) ?> €</h5>
                         </p>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><?= hh($fila['descripcion']) ?></p>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> Categoria: <?= hh($fila['categoria']) ?></p>

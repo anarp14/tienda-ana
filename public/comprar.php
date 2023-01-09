@@ -90,7 +90,13 @@
                         $codigo = $articulo->getCodigo();
                         $cantidad = $linea->getCantidad();
                         $precio = $articulo->getPrecio();
-                        $importe = $cantidad * $precio;
+                        $nuevo_precio = $articulo->getNuevoPrecio();
+                        if (isset($fila['nuevo_precio']) && $fila['nuevo_precio'] != 0.00){
+                            $importe = $cantidad * $nuevo_precio;
+                        }
+                        else{
+                            $importe = $cantidad * $precio;
+                        }              
                         $total += $importe;
                         ?>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -98,7 +104,7 @@
                             <td class="py-4 px-6"><?= $articulo->getDescripcion() ?></td>
                             <td class="py-4 px-6 text-center"><?= $cantidad ?></td>
                             <td class="py-4 px-6 text-center">
-                                <?= dinero($precio) ?>
+                                <?= dinero($nuevo_precio) ?>
                             </td>
                             <td class="py-4 px-6 text-center">
                                 <?= dinero($importe) ?>
