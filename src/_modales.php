@@ -213,7 +213,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">ESTÁS MODIFICANDO UNA CATEGORIA</h3>
-                <form class="space-y-6" action="/admin/editar.php" method="POST">
+                <form class="space-y-6" action="/admin/modificar_categoria.php" method="POST">
                     <div>
                         <label for="categoria" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Categoria</label>
                         <input type="text" name="categoria" id="categoria" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">

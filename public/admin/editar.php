@@ -29,7 +29,7 @@ if (isset($precio) && $precio != '') {
     $set[] = 'precio = :precio';
     $execute[':precio'] = $precio;
 }
-if (isset($descuento)) {
+if (isset($descuento) && $descuento != '') {
     $set[] = 'descuento = :descuento';
     $execute[':descuento'] = $descuento;
 }
@@ -47,9 +47,11 @@ if (isset($visible) && $visible != '') {
 }
 
 $set= !empty($set) ? 'SET ' . implode(' , ', $set) : '';
+var_dump($set);
 $sent = $pdo->prepare("UPDATE articulos
                         $set
                        WHERE id = $id");
+var_dump($sent);
 
 $sent->execute($execute);
 
