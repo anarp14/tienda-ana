@@ -41,7 +41,7 @@ class Factura extends Modelo
         $pdo = $pdo ?? conectar();
 
         if (!isset($this->total)) {
-            $sent = $pdo->prepare('SELECT SUM(cantidad * precio) AS total
+            $sent = $pdo->prepare('SELECT SUM(cantidad * (precio - a.cantidad_descuento)) AS total
                                      FROM articulos_facturas l
                                      JOIN articulos a
                                        ON l.articulo_id = a.id
@@ -64,7 +64,7 @@ class Factura extends Modelo
         $where = !empty($where)
             ? 'WHERE ' . implode(' AND ', $where)
             : '';
-        $sent = $pdo->prepare("SELECT f.*, SUM(cantidad * precio) AS total
+        $sent = $pdo->prepare("SELECT f.*, SUM(cantidad * (precio - a.cantidad_descuento)) AS total
                                  FROM facturas f
                                  JOIN articulos_facturas l
                                    ON l.factura_id = f.id

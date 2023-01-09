@@ -29,11 +29,11 @@
     $where = [];
     $execute = [];
     if (isset($precio_min) && $precio_min != '') {
-        $where[] = 'precio >= :precio_min';
+        $where[] = '(precio - cantidad_descuento) >= :precio_min';
         $execute[':precio_min'] = $precio_min;
     }
     if (isset($precio_max) && $precio_max != '') {
-        $where[] = 'precio <= :precio_max ';
+        $where[] = '(precio - cantidad_descuento) <= :precio_max ';
         $execute[':precio_max'] = $precio_max;
     }
     if (isset($nombre) && $nombre != '') {
@@ -93,8 +93,8 @@
                     <div class="p-6 max-w-xs min-w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><?= hh($fila['descripcion']) ?> - <?= hh($fila['precio']) ?> € </h5>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            <?php if (isset($fila['nuevo_precio']) && $fila['nuevo_precio'] != 0) : ?>
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-red-900 dark:text-white"> Precio Rebajado : <?= hh($fila['nuevo_precio']) ?> €</h5>
+                            <?php if (isset($fila['descuento']) && $fila['descuento'] > 0) : ?>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-red-900 dark:text-white"> Precio Rebajado : <?= hh($fila['precio']) - hh($fila['cantidad_descuento']) ?> €</h5>
                     <?php endif ?>
                     </p>
                     </p>

@@ -71,6 +71,7 @@
                     <th scope="col" class="py-3 px-6">Descripción</th>
                     <th scope="col" class="py-3 px-6">Precio</th>
                     <th scope="col" class="py-3 px-6">Descuento %</th>
+                    <th scope="col" class="py-3 px-6">Cantidad descontada</th>
                     <th scope="col" class="py-3 px-6">Nuevo precio</th>
                     <th scope="col" class="py-3 px-6">Stock</th>
                     <th scope="col" class="py-3 px-6">Categoria</th>
@@ -85,7 +86,8 @@
                             <td class="py-4 px-6"><?= hh($fila['descripcion']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['precio']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['descuento']) ?></td>
-                            <td class="py-4 px-6"><?= hh($fila['nuevo_precio']) ?></td>
+                            <td class="py-4 px-6"><?= hh($fila['cantidad_descuento']) ?></td>
+                            <td class="py-4 px-6"><?= hh($fila['precio']) - hh($fila['cantidad_descuento']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['stock']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['categoria']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['categoria_id']) ?></td>

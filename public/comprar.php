@@ -1,3 +1,4 @@
+
 <?php session_start() ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +20,6 @@
 
     $carrito = unserialize(carrito());
 
-    
     if (obtener_post('_testigo') !== null) {
         $pdo = conectar();
         $sent = $pdo->prepare('SELECT *
@@ -27,7 +27,7 @@
                                 WHERE id IN (:ids)');
         foreach ($sent->fetchAll(PDO::FETCH_ASSOC) as $fila) {
             if ($fila['stock'] < $carrito->getLinea($fila['id'])->getCantidad()) {
-                $_SESSION['error'] = 'No hay existencias suficientes para crear la factura.';
+                $_SESSION['error'] = 'No hay existencias suficientes pa ra crear la factura.';
                 return volver();
             }
         }
@@ -89,14 +89,8 @@
                         $articulo = $linea->getArticulo();
                         $codigo = $articulo->getCodigo();
                         $cantidad = $linea->getCantidad();
-                        $precio = $articulo->getPrecio();
-                        $nuevo_precio = $articulo->getNuevoPrecio();
-                        if (isset($fila['nuevo_precio']) && $fila['nuevo_precio'] != 0.00){
-                            $importe = $cantidad * $nuevo_precio;
-                        }
-                        else{
-                            $importe = $cantidad * $precio;
-                        }              
+                        $precio = $articulo-> getCantidadDescuento() != 0 ? $articulo->getPrecio() - $articulo-> getCantidadDescuento() : $articulo->getPrecio();
+                        $importe = $cantidad * $precio;
                         $total += $importe;
                         ?>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -104,7 +98,7 @@
                             <td class="py-4 px-6"><?= $articulo->getDescripcion() ?></td>
                             <td class="py-4 px-6 text-center"><?= $cantidad ?></td>
                             <td class="py-4 px-6 text-center">
-                                <?= dinero($nuevo_precio) ?>
+                                <?= dinero($precio) ?>
                             </td>
                             <td class="py-4 px-6 text-center">
                                 <?= dinero($importe) ?>
