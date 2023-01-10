@@ -51,10 +51,10 @@
         <?php require '../../src/_alerts.php' ?>
         <?php require_once '../../src/_modales.php' ?>
         <div class="overflow-x-auto relative mt-4">
-            <a href="usuarios.php" target="_blank">
+            <a href="/admin/usuarios.php" target="_blank">
                 <button class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">Usuarios</button>
             </a>
-            <a href="categorias.php" target="_blank">
+            <a href="/admin/categorias.php" target="_blank">
                 <button class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">Categorias</button>
             </a>
 
@@ -100,11 +100,11 @@
                                         Editar
                                     </button>
                                 </form>
-                                <form action="/admin/borrar.php" method="POST" class="inline">
+                                <form action="/borrar.php" method="POST" class="inline">
                                     <input type="hidden" name="id" value="<?= $fila_id ?>">
                                     <button type="submit" onclick="cambiar(event, <?= $fila_id ?>)" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" data-modal-toggle="popup-modal">Borrar</button>
                                 </form>
-                                <form action="/admin/rebajas.php" method="POST" class="inline">
+                                <form action="/rebajas.php" method="POST" class="inline">
                                     <input type="hidden" name="id" value="<?= $fila_id ?>">
                                     <button type="submit" onclick="cambiarModificar_descuento(event, <?= $fila_id ?>)" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900" data-modal-toggle="rebajas">
                                         Descuento
