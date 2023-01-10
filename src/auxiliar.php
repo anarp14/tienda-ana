@@ -65,3 +65,8 @@ function volver_categorias()
 {
     header("Location: /admin/categorias.php");
 }
+
+function volver_a($location)
+{
+    header("Location: " . $location);
+}

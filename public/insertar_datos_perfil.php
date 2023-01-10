@@ -23,10 +23,17 @@ if (isset($apellidos) && $apellidos != '') {
     $execute[':apellidos'] = $apellidos;
 } 
 if (isset($email) && $email != '') {
+    if (!preg_match("/^[A-z0-9\\._-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9_-]+)*\\.([A-z]{2,6})$/", $email)) {
+        $_SESSION['error'] = "El email es inválido";
+        return (volver_a("/perfil.php"));
+    }
     $set[] = 'email = :email';
     $execute[':email'] = $email;
 }
-if (isset($telefono) && $telefono != '') {
+if (isset($telefono) && $telefono != '') { if (!preg_match("/^\d{9}$/", $telefono)) {
+    $_SESSION['error'] = "El teléfono debe contener 9 dígitos y sólo puede contener números";
+    return (volver_a("/perfil.php"));
+}
     $set[] = 'telefono = :telefono';
     $execute[':telefono'] = $telefono;
 } 
@@ -46,4 +53,4 @@ $sent->execute($execute);
 $_SESSION['exito'] = 'El perfil del usuario se ha añadido correctamente.';
 
 
-return(volver());
+return (volver_a("/perfil.php"));

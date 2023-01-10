@@ -14,6 +14,8 @@
     <?php
     require '../vendor/autoload.php';
     require '../src/_modales.php';
+    require '../src/_menu.php';
+    require '../src/_alerts.php';
 
 
     if (!($usuario = \App\Tablas\Usuario::esta_logueado())) {

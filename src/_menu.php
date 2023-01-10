@@ -21,9 +21,12 @@
                     </div>
                 <?php endif ?>
                 <ul class="py-1" aria-labelledby="user-menu-button">
-                    <li>
-                        <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Index</a>
-                    </li>
+                    <?php
+                    if (\App\Tablas\Usuario::logueado()->usuario == 'admin') : ?>
+                        <li>
+                            <a href="/admin/index.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Index</a>
+                        </li>
+                    <?php endif ?>
                     <li>
                         <a href="/perfil.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Perfil</a>
                     </li>
