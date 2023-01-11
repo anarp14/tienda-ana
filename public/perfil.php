@@ -50,16 +50,14 @@
                             <td class="py-4 px-6"><?= hh($fila['email']) ?></td>
                             <td class="py-4 px-6"><?= hh($fila['telefono']) ?></td>
                             <td class="px-6 text-center">
-                                <button data-modal-toggle="insertar_datos_perfil" href="insertar_datos_perfil.php" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">
-                                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-green dark:bg-gray-900 rounded-md group-hover:bg-opacity-1">
-                                        Insertar datos
-                                    </span>
-                                </button>
-                                <button data-modal-toggle="cambiar_password" href="cambiar_password.php" class="focus:outline-none text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-900">
-                                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-green dark:bg-gray-900 rounded-md group-hover:bg-opacity-1">
-                                        Cambiar contraseña
-                                    </span>
-                                </button>
+                                <?php require '../src/_alerts.php' ?>
+                                    <button data-modal-toggle="insertar_datos_perfil" href="insertar_datos_perfil.php" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">
+                                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-green dark:bg-gray-900 rounded-md group-hover:bg-opacity-1">
+                                            Insertar datos
+                                        </span>
+                                    </button>
+
+                                    <a href="/cambiar_password.php" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Cambiar contraseña</a>
                             </td>
                         </tr>
                     <?php endforeach ?>

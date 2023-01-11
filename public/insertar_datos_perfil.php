@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once '../vendor/autoload.php';
-require_once "../src/auxiliar.php";
+require '../vendor/autoload.php';
 
 $id = \App\Tablas\Usuario::logueado()->id;
 var_dump($id);
