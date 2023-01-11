@@ -24,6 +24,18 @@ try {
         return volver();
     }
 
+    $stock = $articulo->getStock();
+
+
+    $carrito = unserialize(carrito());
+    $lineas = $carrito->getLineas();
+    $cant = empty($lineas[$id]) ? 0 : $lineas[$id]->getCantidad();
+
+    if( $stock <= $cant){
+        $_SESSION['error'] = 'No hay existencias suficientes.';
+        return volver();
+    }
+
     $carrito = unserialize(carrito());
     $carrito->insertar($id);
     $_SESSION['carrito'] = serialize($carrito);
