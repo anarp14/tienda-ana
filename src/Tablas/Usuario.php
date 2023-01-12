@@ -28,6 +28,8 @@ class Usuario extends Modelo
         return isset($_SESSION['login']);
     }
 
+    // devuelve el usuario actual si hay una sesión de "login" activa, de lo contrario devuelve null.
+    
     public static function logueado(): ?static
     {
         return isset($_SESSION['login']) ? unserialize($_SESSION['login']) : null;

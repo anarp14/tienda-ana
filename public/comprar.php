@@ -1,4 +1,3 @@
-
 <?php session_start() ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -89,7 +88,7 @@
                         $articulo = $linea->getArticulo();
                         $codigo = $articulo->getCodigo();
                         $cantidad = $linea->getCantidad();
-                        $precio = $articulo-> getCantidadDescuento() != 0 ? $articulo->getPrecio() - $articulo-> getCantidadDescuento() : $articulo->getPrecio();
+                        $precio = $articulo->getDescuento() > 0 ? $articulo->getPrecio() - ($articulo->getPrecio() * $articulo->getDescuento()/100) : $articulo->getPrecio();
                         $importe = $cantidad * $precio;
                         $total += $importe;
                         ?>
@@ -120,5 +119,7 @@
     </div>
     <script src="/js/flowbite/flowbite.js"></script>
 </body>
+
+</html>
 
 </html>

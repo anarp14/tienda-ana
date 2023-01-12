@@ -7,7 +7,6 @@ $id = obtener_post('id');
 $codigo = $_POST['codigo'];
 $descripcion = $_POST['descripcion'];
 $precio = $_POST['precio'];
-$descuento= $_POST['descuento'];
 $stock = $_POST['stock'];
 $categoria_id = $_POST['categoria_id'];
 $visible = $_POST['visible'];
@@ -23,12 +22,11 @@ $sent = $pdo->prepare("SELECT codigo, descripcion, precio, descuento, stock, vis
 $sent->execute([':id' => $id]);
 $origin = $sent->fetch(PDO::FETCH_ASSOC);
 
-$sent = $pdo->prepare("INSERT INTO articulos (codigo, descripcion, precio, descuento, stock, categoria_id, visible) VALUES (:codigo, :descripcion, :precio, :descuento, :stock, :categoria_id, :visible)");
+$sent = $pdo->prepare("INSERT INTO articulos (codigo, descripcion, precio, stock, categoria_id, visible) VALUES (:codigo, :descripcion, :precio, :stock, :categoria_id, :visible)");
 $sent->execute([
     ':codigo' => $codigo,
     ':descripcion' => $descripcion,
     ':precio' => $precio,
-    ':descuento' => $descuento ?: $origin['descuento'],
     ':stock'  => $stock,
     ':categoria_id'  => $categoria_id,
     ':visible'  => $visible
