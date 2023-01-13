@@ -94,11 +94,16 @@ session_start(); ?>
             $_SESSION['exito'] = 'La contraseña se ha modificado correctamente.';
 
             return volver_a("/perfil.php");
+        } else {
+            foreach (['password', 'newpassword', 'passwordrepeat'] as $e) {
+                if (isset($error[$e])) {
+                    $clases_input[$e] = $clases_input_error;
+                    $clases_label[$e] = $clases_label_error;
+                }
+            }
         }
+
     }
-
-
-
 
     ?>
 

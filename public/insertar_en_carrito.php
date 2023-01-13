@@ -24,8 +24,8 @@ try {
         return volver();
     }
 
+    //Impedir que añada un articulo si no hay mas existencias
     $stock = $articulo->getStock();
-
 
     $carrito = unserialize(carrito());
     $lineas = $carrito->getLineas();
