@@ -70,3 +70,8 @@ function volver_a($location)
 {
     header("Location: " . $location);
 }
+
+function volverCategoria($categoria)
+{
+    header("Location: /index.php?categoria=$categoria");
+}

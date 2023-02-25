@@ -15,13 +15,19 @@
     require '../vendor/autoload.php';
 
     $carrito = unserialize(carrito());
+
     $precio_min = obtener_get('precio_min');
     $precio_max = obtener_get('precio_max');
     $nombre = obtener_get('nombre');
     $categoria = obtener_get('categoria');
     $visible = obtener_get('visible');
 
+    
+
+    var_dump($categoria);
+
     $pdo = conectar();
+
 
     $where = [];
     $execute = [];
@@ -41,14 +47,16 @@
         $where[] = 'lower(categoria) LIKE lower(:categoria)';
         $execute[':categoria'] = "%$categoria%";
     }
+
+
     $where = !empty($where) ?  'WHERE ' . implode(' AND ', $where) . ' AND visible = true' : 'WHERE visible = true';
 
     try {
-        $sent = $pdo->prepare("SELECT p.*, c.categoria
-                                FROM articulos p
-                                JOIN categorias c ON c.id = p.categoria_id
-                                $where
-                                ORDER BY codigo");
+        $sent = $pdo->prepare("SELECT p.*, c.categoria, c.id as categoria_id
+                            FROM articulos p
+                            JOIN categorias c ON c.id = p.categoria_id
+                            $where
+                            ORDER BY codigo");
         $sent->execute($execute);
     } catch (PDOException $e) {
         var_dump($e->getMessage());
@@ -61,7 +69,7 @@
         <?php require '../src/_alerts.php' ?>
         <br>
         <div>
-            <form action="" method="get">
+            <form action="" method="GET">
                 <fieldset>
                     <legend> <b>Criterios de búsqueda </b></legend>
                     <div class="flex mb-3 font-normal text-gray-700 dark:text-gray-400">
@@ -110,7 +118,8 @@
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> Categoria: <?= hh($fila['categoria']) ?></p>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Existencias: <?= hh($fila['stock']) ?></p>
                         <?php if ($fila['stock'] > 0) : ?>
-                            <a href="/insertar_en_carrito.php?id=<?= $fila['id'] ?>" class="inline-flex items-center py-2 px-3.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+
+                            <a href="/insertar_en_carrito.php?id=<?= $fila['id']  ?><?php if (!empty($nombre)) { ?>&nombre=<?= hh($nombre) ?><?php } ?><?php if (!empty($precio_min)) { ?>&precio_min=<?= hh($precio_min) ?><?php } ?><?php if (!empty($precio_max)) { ?>&precio_max=<?= hh($precio_max) ?><?php } ?><?php if (!empty($categoria)) { ?>&categoria=<?= hh($categoria) ?><?php } ?>" class="inline-flex items-center py-2 px-3.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Añadir al carrito
                                 <svg aria-hidden="true" class="ml-3 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -140,12 +149,14 @@
                                     $cantidad = $linea->getCantidad();
                                     ?>
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                        <td class="py-4 px-6"><?= $articulo->getDescripcion() ?></td>
-                                        <td class="py-4 px-6 text-center"><?= $cantidad ?></td>
-                                        <td>
-                                            <a href="/eliminar_articulo_carrito.php?id=<?= $articulo->getId() ?>" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</a>
+                                        <td class="py-4 px-6"><?= $articulo->getDescripcion() ?> <br>
+                                            <?= $articulo->getCategoriaNombre() ?>
                                         </td>
-                                    </tr>
+                                        <td class="py-4 px-6 text-center"><?= $cantidad ?></td>
+                                        <td class="py-4 px-6 text-center">
+                                            <a href="/incrementar.php?id=<?= $articulo->getId()?><?php if (!empty($nombre)) { ?>&nombre=<?= hh($nombre) ?><?php } ?><?php if (!empty($precio_min)) { ?>&precio_min=<?= hh($precio_min) ?><?php } ?><?php if (!empty($precio_max)) { ?>&precio_max=<?= hh($precio_max) ?><?php } ?><?php if (!empty($categoria)) { ?>&categoria=<?= hh($categoria) ?><?php } ?>" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">+</a><a href="/decrementar.php?id=<?= $articulo->getId() ?><?php if (!empty($nombre)) { ?>&nombre=<?= hh($nombre) ?><?php } ?><?php if (!empty($precio_min)) { ?>&precio_min=<?= hh($precio_min) ?><?php } ?><?php if (!empty($precio_max)) { ?>&precio_max=<?= hh($precio_max) ?><?php } ?><?php if (!empty($categoria)) { ?>&categoria=<?= hh($categoria) ?><?php } ?>" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">-</a>
+                                        </td>
+                                        </tr>
                                 <?php endforeach ?>
                             </tbody>
                         </table>

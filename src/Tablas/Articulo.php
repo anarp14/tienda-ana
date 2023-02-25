@@ -2,6 +2,8 @@
 
 namespace App\Tablas;
 
+
+use App\Tablas\Categoria;
 use PDO;
 
 class Articulo extends Modelo
@@ -57,12 +59,13 @@ class Articulo extends Modelo
         return $this->stock;
     }
 
-    public function getCategoria_id()
-    {
-        return $this->categoria_id;
-    }
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getCategoriaNombre(?PDO $pdo = null)
+    {
+        return Categoria::obtener($this->categoria_id, $pdo)->categoria;
     }
 }

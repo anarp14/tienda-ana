@@ -15,36 +15,18 @@ try {
     $id = obtener_get('id');
 
     if ($id === null) {
-        volver();
+        return volver();
     }
 
     $articulo = Articulo::obtener($id);
 
     if ($articulo === null) {
-        volver();
-    }
-
-    if ($articulo->getStock() <= 0) {
-        $_SESSION['error'] = 'No hay existencias suficientes.';
-        volver();
-    }
-
-    //Impedir que añada un articulo si no hay mas existencias
-    $stock = $articulo->getStock();
-
-    $carrito = unserialize(carrito());
-    $lineas = $carrito->getLineas();
-    $cant = empty($lineas[$id]) ? 0 : $lineas[$id]->getCantidad();
-
-    if ($stock <= $cant) {
-        $_SESSION['error'] = 'No hay existencias suficientes.';
         return volver();
     }
 
     $carrito = unserialize(carrito());
-    $carrito->insertar($id);
+    $carrito->eliminar($id);
     $_SESSION['carrito'] = serialize($carrito);
-
 
     $params = "";
     if ($nombre !== null) {
@@ -66,11 +48,8 @@ try {
 
     header("Location: /index.php?$params");
 
-   
-   
 } catch (ValueError $e) {
     // TODO: mostrar mensaje de error en un Alert
-    volver();
 }
 
-
+volver();
