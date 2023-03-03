@@ -1,24 +1,22 @@
 <?php
 session_start();
 
-require '../../src/auxiliar.php';
+require '../../vendor/autoload.php';
 
 
 $id = obtener_post('id');
-
-
 
 // if (!comprobar_csrf()) {
 //     return volver_admin();
 // }
 
 if (!isset($id)) {
-    return volver_categorias();
+    return volver_admin();
 }
 
 // TODO: Validar id //DONE:
 if(!ctype_digit($id) || !isset($id)){
-    return volver_categorias();
+    return volver_categoria();
 } else {
     $pdo = conectar();
     $sent = $pdo->prepare("SELECT COUNT(categoria) FROM categorias WHERE id = :id AND id NOT in (SELECT categoria_id FROM articulos);");
@@ -33,6 +31,5 @@ if(!ctype_digit($id) || !isset($id)){
    
 }
 
-volver_categorias();
 
-
+volver_categoria();

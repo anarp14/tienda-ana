@@ -1,18 +1,14 @@
 <?php
+session_start();
 
 use App\Tablas\Articulo;
 
-session_start();
 
 require '../vendor/autoload.php';
 
-$precio_min = obtener_get('precio_min');
-$precio_max = obtener_get('precio_max');
-$nombre = obtener_get('nombre');
-$categoria = obtener_get('categoria');
-
 try {
     $id = obtener_get('id');
+    $cupon = obtener_get('cupon');
 
     if ($id === null) {
         return volver();
@@ -24,32 +20,20 @@ try {
         return volver();
     }
 
+
     $carrito = unserialize(carrito());
     $carrito->eliminar($id);
     $_SESSION['carrito'] = serialize($carrito);
-
-    $params = "";
-    if ($nombre !== null) {
-        $params .= '&nombre=' . hh($nombre);
-    }
-
-        
-    if ($categoria !== null) {
-        $params .= '&categoria=' . hh($categoria);
-    }
-
-    if ($precio_max !== null) {
-        $params .= '&precio_max=' . hh($precio_max);
-    }
-
-    if ($precio_min !== null) {
-        $params .= '&precio_min=' . hh($precio_min);
-    }
-
-    header("Location: /index.php?$params");
-
 } catch (ValueError $e) {
     // TODO: mostrar mensaje de error en un Alert
 }
 
-volver();
+// Redirige de vuelta al carrito
+
+if($cupon !== null) {
+    
+    $url .= '&cupon=' . hh($cupon);
+}
+
+header("Location: /comprar.php?$url");
+

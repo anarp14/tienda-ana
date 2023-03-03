@@ -28,8 +28,6 @@ class Usuario extends Modelo
         return isset($_SESSION['login']);
     }
 
-    // devuelve el usuario actual si hay una sesión de "login" activa, de lo contrario devuelve null.
-    
     public static function logueado(): ?static
     {
         return isset($_SESSION['login']) ? unserialize($_SESSION['login']) : null;
@@ -73,21 +71,4 @@ class Usuario extends Modelo
             ':password' => password_hash($password, PASSWORD_DEFAULT),
         ]);
     }
-
-    public function obtenerId()
-    {
-        return $this->id;
-    }
-
-    public function cambiar_password($user, $password, ?PDO $pdo = null)
-    {
-        $sent = $pdo->prepare("UPDATE usuarios
-                                SET password = :password
-                                WHERE id = :id");
-        $sent->execute([
-            ':id' => $user->obtenerId(),
-            ':password' => password_hash($password, PASSWORD_DEFAULT),
-        ]);
-    }
 }
-

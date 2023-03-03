@@ -6,10 +6,10 @@ session_start();
 
 require '../vendor/autoload.php';
 
+$categoria = obtener_get('categoria');
 $precio_min = obtener_get('precio_min');
 $precio_max = obtener_get('precio_max');
 $nombre = obtener_get('nombre');
-$categoria = obtener_get('categoria');
 
 try {
     $id = obtener_get('id');
@@ -29,22 +29,9 @@ try {
         volver();
     }
 
-    //Impedir que añada un articulo si no hay mas existencias
-    $stock = $articulo->getStock();
-
-    $carrito = unserialize(carrito());
-    $lineas = $carrito->getLineas();
-    $cant = empty($lineas[$id]) ? 0 : $lineas[$id]->getCantidad();
-
-    if ($stock <= $cant) {
-        $_SESSION['error'] = 'No hay existencias suficientes.';
-        return volver();
-    }
-
     $carrito = unserialize(carrito());
     $carrito->insertar($id);
     $_SESSION['carrito'] = serialize($carrito);
-
 
     $params = "";
     if ($nombre !== null) {
@@ -65,12 +52,7 @@ try {
     }
 
     header("Location: /index.php?$params");
-
-   
-   
 } catch (ValueError $e) {
     // TODO: mostrar mensaje de error en un Alert
     volver();
 }
-
-

@@ -2,7 +2,6 @@
 
 namespace App\Tablas;
 
-
 use App\Tablas\Categoria;
 use PDO;
 
@@ -10,13 +9,13 @@ class Articulo extends Modelo
 {
     protected static string $tabla = 'articulos';
 
-    public $id;
+    private $id;
     private $codigo;
     private $descripcion;
     private $precio;
-    private $descuento;
     private $stock;
     private $categoria_id;
+    private $descuento;
 
     public function __construct(array $campos)
     {
@@ -24,9 +23,9 @@ class Articulo extends Modelo
         $this->codigo = $campos['codigo'];
         $this->descripcion = $campos['descripcion'];
         $this->precio = $campos['precio'];
-        $this->descuento = $campos['descuento'];
         $this->stock = $campos['stock'];
         $this->categoria_id = $campos['categoria_id'];
+        $this->descuento = $campos['descuento'];
     }
 
     public static function existe(int $id, ?PDO $pdo = null): bool
@@ -49,11 +48,6 @@ class Articulo extends Modelo
         return $this->precio;
     }
 
-    public function getDescuento()
-    {
-        return $this->descuento;
-    }
-
     public function getStock()
     {
         return $this->stock;
@@ -64,8 +58,14 @@ class Articulo extends Modelo
         return $this->id;
     }
 
+    public function getDescuento()
+    {
+        return $this->descuento;
+    }
+
     public function getCategoriaNombre(?PDO $pdo = null)
     {
-        return Categoria::obtener($this->categoria_id, $pdo)->categoria;
+        return Categoria::obtener($this->categoria_id, $pdo);
     }
+    
 }

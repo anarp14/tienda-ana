@@ -56,22 +56,12 @@ function volver_admin()
     header("Location: /admin/");
 }
 
-function redirigir_login()
-{
-    header('Location: /login.php');
-}
-
-function volver_categorias()
+function volver_categoria()
 {
     header("Location: /admin/categorias.php");
 }
 
-function volver_a($location)
+function redirigir_login()
 {
-    header("Location: " . $location);
-}
-
-function volverCategoria($categoria)
-{
-    header("Location: /index.php?categoria=$categoria");
+    header('Location: /login.php');
 }

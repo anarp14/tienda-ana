@@ -56,23 +56,27 @@ use App\Tablas\Usuario;
         if ($password_repeat == '') {
             $error['password_repeat'][] = 'La contraseña es obligatoria.';
         }
-        if (mb_strlen($password) < 8) {
-            $error['password'][] = 'Debe tener al menos 8 caracteres.';
-        }
+
         if (preg_match('/[a-z]/', $password) !== 1) {
             $error['password'][] = 'Debe contener al menos una minúscula.';
         }
+
         if (preg_match('/[A-Z]/', $password) !== 1) {
-                $error['password'][] = 'Debe contener al menos una mayúscula.';
+            $error['password'][] = 'Debe contener al menos una mayúscula.';
         }
+
         if (preg_match('/[[:digit:]]/', $password) !== 1) {
             $error['password'][] = 'Debe contener al menos un dígito.';
         }
 
         if (preg_match('/[[:punct:]]/', $password) !== 1) {
             $error['password'][] = 'Debe contener al menos un signo de puntuación.';
-        }    
-        
+        }
+
+        if (mb_strlen($password) < 8) {
+            $error['password'][] = 'Debe tener al menos 8 caracteres.';
+        }
+
         $vacio = true;
 
         foreach ($error as $err) {
@@ -81,6 +85,7 @@ use App\Tablas\Usuario;
                 break;
             }
         }
+
         if ($vacio) {
             // Registrar
             Usuario::registrar($login, $password, $pdo);
@@ -95,7 +100,6 @@ use App\Tablas\Usuario;
             }
         }
     }
-    
     ?>
     <div class="container mx-auto">
         <?php require '../src/_menu.php' ?>

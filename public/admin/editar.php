@@ -1,7 +1,8 @@
-
 <?php
 session_start();
-require '../../src/auxiliar.php';
+
+require '../../vendor/autoload.php';
+
 
 $id = obtener_post('id');
 $codigo= obtener_post('codigo');
@@ -10,7 +11,6 @@ $precio = obtener_post('precio');
 $descuento = obtener_post('descuento');
 $stock = obtener_post('stock');
 $categoria_id= obtener_post('categoria_id');
-$visible= obtener_post('visible');
 
 
 $pdo = conectar();
@@ -29,10 +29,12 @@ if (isset($precio) && $precio != '') {
     $set[] = 'precio = :precio';
     $execute[':precio'] = $precio;
 }
+
 if (isset($descuento) && $descuento != '') {
     $set[] = 'descuento = :descuento';
     $execute[':descuento'] = $descuento;
 }
+
 if (isset($stock) && $stock != '') {
     $set[] = 'stock = :stock';
     $execute[':stock'] = $stock;
@@ -41,17 +43,17 @@ if (isset($categoria_id) && $categoria_id != '') {
     $set[] = 'categoria_id = :categoria_id';
     $execute[':categoria_id'] = $categoria_id;
 }
-if (isset($visible) && $visible != '') {
-    $set[] = 'visible = :visible';
-    $execute[':visible'] = $visible;
-}
+
 
 $set= !empty($set) ? 'SET ' . implode(' , ', $set) : '';
+
 $sent = $pdo->prepare("UPDATE articulos
                         $set
                        WHERE id = $id");
 
 $sent->execute($execute);
+
+
 
 $_SESSION['exito'] = "Artículo modificado con éxito.";
 return volver_admin();
